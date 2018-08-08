@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script>
+  function check(source) {
+    var stack = [],
+        pair = {
+            '(': ')',
+            '[': ']',
+            '{': '}'
+        },
+        len = source.length,
+        i, ch;
+    for (i = 0; i < len; i++) {
+        ch = source.charAt(i);
+        switch (ch) {
+            case '(':
+            case '[':
+            case '{':
+                stack.push(pair[ch]);
+            break;
+
+            case ')':
+            case ']':
+            case '}':
+                if (0 == stack.length)
+                    throw new Error('Закрывающая "' + ch + '", когда нечего закрывать');
+
+                if (stack[stack.length - 1] != ch)
+                    throw new Error('Ожидалось "' + stack[stack.length - 1] + '", но внезапно "' + ch + '"');
+
+                stack.pop();
+        };
+    };
+    if (stack.length)
+        throw new Error('В конце остаились незакрыты: "' + stack.reverse().join('", "') + '"');
+
+    return true;
+};
+
+// проверка:
+try {
+    check(prompt('Строка для проверки', ''));
+    alert('Ok');
+}
+catch (e) {
+    alert('Fail: ' + e.message);
+};
+	</script>
+	<title>Brackets</title>
+</head>
+<body>
+
+
+
+</body>
+</html>
