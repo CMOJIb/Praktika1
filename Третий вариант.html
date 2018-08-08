@@ -1,0 +1,33 @@
+<html>
+<body>
+
+<script>
+var check = (function(close) {
+ var open = { };
+ for (i in close)
+  open[close[i]] = i;
+
+ return function(str) {
+  var first=0, begin = 0, end = 1, len = str.length;
+  while (first < len) {
+   if (close[str[end]] == str[begin]) {
+    if (begin == first)
+     begin = first = ++end;
+    else
+     begin--;
+   }
+   else if (open[str[end]])
+    begin++;
+   else
+    return false;
+   end++;
+  }
+  return true;
+ };
+})({ ')':'(', '>':'<', '}':'{', ']':'[' });
+
+alert(check("[[[]]][][[]][()]{}[]")); // true
+alert(check("[[[)]]][][[]][()]{}[]")); // false
+</script>
+</body>
+</html>
