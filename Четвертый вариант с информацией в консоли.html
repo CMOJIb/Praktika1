@@ -13,19 +13,19 @@
 		var openBrackets;
 		var closeBrackets;
 
-		// Checking on equality length brackets
+		
 		if(str.length % 2 != 0){
 			return null;
 		}
 
-		// Checking on allowed brackets
+		
 		for(var i = 0; i < str.length / 2; i++){
 			if(!brackets[str[i]]){
 				return null;
 			}
 		}
 
-		// Create correct sequence
+		
 		openBrackets = str.substr(0, str.length / 2);
 		closeBrackets = str.substr(str.length / 2).split("");
 
